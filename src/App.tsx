@@ -4,6 +4,8 @@ import './styles/global.css';
 import { Container } from './components/Container';
 import { Logo } from './components/Logo';
 import { Menu } from './components/Menu';
+import { CountDown } from './components/CountDown';
+import { DefaultInput } from './components/DefaultInput';
 
 export function App() {
   return (
@@ -14,6 +16,38 @@ export function App() {
 
       <Container>
         <Menu />
+      </Container>
+
+      <Container>
+        <CountDown />
+      </Container>
+
+      <Container>
+        <form action='' className='form'>
+          <div className='formRow'>
+            <DefaultInput
+              labelText='Task:'
+              id='meuInput'
+              type='text'
+              placeholder='Digite a tarefa...'
+            />
+          </div>
+
+          <div className='formRow'>
+            <p>
+              Nesse ciclo <b>descanse</b> por <b>5 minutos.</b>
+            </p>
+          </div>
+
+          <div className='formRow'>
+            <p>Ciclos</p>
+            <p>0 0 0 0 0</p>
+          </div>
+
+          <div className='formRow'>
+            <button>Enviar</button>
+          </div>
+        </form>
       </Container>
     </>
   );
