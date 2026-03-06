@@ -17,7 +17,7 @@ export function MainForm() {
 
       <div className='formRow'>
         <p>
-          Nesse ciclo <b>descanse</b> por <b>5 minutos.</b>
+          Nesse ciclo <b>descanse</b> por <b>25min.</b>
         </p>
       </div>
 
