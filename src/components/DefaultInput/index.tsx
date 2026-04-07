@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import styles from './styles.module.css';
 
 type DefaultInputProps = {
@@ -5,16 +6,19 @@ type DefaultInputProps = {
   labelText: string;
 } & React.ComponentProps<'input'>;
 
-export function DefaultInput({
-  id,
-  type,
-  labelText,
-  ...rest
-}: DefaultInputProps) {
-  return (
-    <>
-      <label htmlFor={id}>{labelText}</label>
-      <input className={styles.input} id={id} type={type} {...rest} />
-    </>
-  );
-}
+export const DefaultInput = forwardRef<HTMLInputElement, DefaultInputProps>(
+  ({ id, type, labelText, ...rest }, ref) => {
+    return (
+      <>
+        <label htmlFor={id}>{labelText}</label>
+        <input
+          ref={ref}
+          className={styles.input}
+          id={id}
+          type={type}
+          {...rest}
+        />
+      </>
+    );
+  },
+);
