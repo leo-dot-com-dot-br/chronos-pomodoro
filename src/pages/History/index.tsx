@@ -8,8 +8,9 @@ import styles from './styles.module.css';
 import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 import { formatDate } from '../../utils/formatDate';
 import { getTaskStatus } from '../../utils/getTaskStatus';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { sortTasks, type SortTasksOptions } from '../../utils/sortTasks';
+import { showMessage } from '../../adapters/showMessage';
 import { TaskActionTypes } from '../../contexts/TaskContext/taskActions';
 
 export function History() {
@@ -31,6 +32,12 @@ export function History() {
     });
   }, [state.tasks, sortTasksOptions]);
 
+  useEffect(() => {
+    return () => {
+      showMessage.dismiss();
+    };
+  }, []);
+
   function handleSortTasks({ field }: Pick<SortTasksOptions, 'field'>) {
     const newDirection = sortTasksOptions.direction === 'desc' ? 'asc' : 'desc';
 
@@ -41,9 +48,12 @@ export function History() {
   }
 
   function handleResetHistory() {
-    if (!confirm('Tem certeza que deseja excluir o histórico?')) return;
+    showMessage.dismiss();
+    showMessage.confirm('Deseja excluir o histórico?', confirmation => {
+      if (!confirmation) return;
 
-    dispatch({ type: TaskActionTypes.RESET_STATE });
+      dispatch({ type: TaskActionTypes.RESET_STATE });
+    });
   }
 
   return (
